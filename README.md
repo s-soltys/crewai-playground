@@ -24,7 +24,7 @@ ollama run llama2
 
 Run the project:
 ```bash
-poetry run python crew_haiku/main.py
+poetry run python main.py
 ```
 
 ## Configuration
