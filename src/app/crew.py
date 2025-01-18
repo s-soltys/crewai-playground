@@ -99,26 +99,35 @@ class App():
 	@crew
 	def crew(self) -> Crew:
 		"""Creates the App crew"""
-		return Crew(
-			agents=self.agents,
-			tasks=[
-				self.research_news_task(),
-				self.summarise_task(),
-				self.write_poem_task(),
-				self.narrate_task()
-			],
-			process=Process.sequential,
-			verbose=True,
-
-			#agents=self.agents,
-			#tasks=[
-			#	Task(
-			#		description="Write a data-driven poem about {topic} incorporating statistics and numbers, then create an audio version.",
-			#		expected_output="An audio file of a narrated poem that includes data and numbers"
-			#	)
-			#],
-			#manager_agent=self.manager,
-			#process=Process.hierarchical,
-			#verbose=True,
-		)
-	
+		use_managed = False
+		if use_managed:
+			return Crew(
+				agents=self.agents,
+				tasks=[
+					Task(
+						description="Write a data-driven poem about {topic} incorporating statistics and numbers.",
+						expected_output="A text file containing the poem"
+					)
+				],
+				manager_agent=self.manager,
+				process=Process.hierarchical,
+				verbose=True
+			)
+		else:
+			return Crew(
+				agents=[
+					self.news_researcher(),
+					self.summary_writer(),
+					self.poet(),
+					self.painter(),
+					self.tts_narrator()
+				],
+				tasks=[
+					self.research_news_task(),
+					self.summarise_task(),
+					self.write_poem_task(),
+					self.narrate_task()
+				],
+				process=Process.sequential,
+				verbose=True
+			)
