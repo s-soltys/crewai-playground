@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from datetime import datetime
-from crewai_tools import (SerperDevTool, DallETool, WebsiteSearchTool)
+from crewai_tools import (SerperDevTool, WebsiteSearchTool)
 from .tools.tts_tool import TextToSpeechTool
 
 # If you want to run a snippet of code before or after the crew starts, 
@@ -37,13 +37,6 @@ class App():
 	def poet(self) -> Agent:
 		return Agent(
 			config=self.agents_config['poet'],
-		)
-
-	@agent
-	def painter(self) -> Agent:
-		return Agent(
-			config=self.agents_config['painter'],
-			tools=[DallETool()]
 		)
 
 	@agent
@@ -84,13 +77,6 @@ class App():
 		)
 
 	@task
-	def paint_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['paint_task'],
-			output_file=f'output/image_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.png'
-		)
-
-	@task
 	def narrate_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['narrate_task'],
@@ -114,7 +100,6 @@ class App():
 					self.news_researcher(),
 					self.summary_writer(),
 					self.poet(),
-					self.painter(),
 					self.tts_narrator()
 				],
 				tasks=[self.managed_poem_task()],
@@ -128,7 +113,6 @@ class App():
 					self.news_researcher(),
 					self.summary_writer(),
 					self.poet(),
-					self.painter(),
 					self.tts_narrator()
 				],
 				tasks=[

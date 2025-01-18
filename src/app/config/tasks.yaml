@@ -23,13 +23,6 @@ write_poem_task:
     A short poem
   agent: poet
 
-paint_task:
-  description: >
-    Paint a picture representing the topic
-  expected_output: >
-    An image representing the poem
-  agent: painter
-
 narrate_task:
   description: >
     Convert the provided text to speech.
