@@ -1,26 +1,23 @@
-[tool.poetry]
-name = "crew-haiku"
+[project]
+name = "app"
 version = "0.1.0"
-description = "A CrewAI project for generating haikus using local LLM"
-authors = ["Your Name <you@example.com>"]
-readme = "README.md"
-packages = [
-    { include = "*.py" }
+description = "app using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.95.0,<1.0.0"
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.10,<3.13"
-crewai = "^0.95.0"
-langchain-community = "^0.3.14"
-langchain-ollama = "^0.2.2"
-langchain-openai = "^0.3.0"
-python-dotenv = "^1.0.1"
-flask = "^3.1.0"
-serperapi = "^0.2.4"
+[project.scripts]
+app = "app.main:run"
+run_crew = "app.main:run"
+train = "app.main:train"
+replay = "app.main:replay"
+test = "app.main:test"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^6.0"
+[tool.crewai]
+type = "crew"
