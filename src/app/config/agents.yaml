@@ -21,3 +21,11 @@ poet:
     Write poetry about {topic}
   backstory: >
     You're a poet who writes poetry about {topic}
+
+painter:
+  role: >
+    Image generator representing poem
+  goal: >
+    Generate an image representing a poem
+  backstory: >
+    You're an image generator who can generate an image about provided input

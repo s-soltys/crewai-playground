@@ -21,3 +21,10 @@ write_poem_task:
   expected_output: >
     A short poem
   agent: poet
+
+paint_task:
+  description: >
+    Paint a picture representing the prompt
+  expected_output: >
+    An image representing the poem
+  agent: painter

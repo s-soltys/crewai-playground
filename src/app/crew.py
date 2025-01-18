@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from datetime import datetime
-from crewai_tools import (SerperDevTool)
+from crewai_tools import (SerperDevTool, DallETool)
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -30,16 +30,21 @@ class App():
 	def summary_writer(self) -> Agent:
 		return Agent(
 			config=self.agents_config['summary_writer'],
-			verbose=True
 		)
 
 	@agent
 	def poet(self) -> Agent:
 		return Agent(
 			config=self.agents_config['poet'],
-			verbose=True
 		)
 
+	@agent
+	def painter(self) -> Agent:
+		return Agent(
+			config=self.agents_config['painter'],
+			tools=[DallETool()]
+		)
+	
 	# To learn more about structured task outputs, 
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
@@ -61,6 +66,13 @@ class App():
 		return Task(
 			config=self.tasks_config['write_poem_task'],
 			output_file=f'output/poem_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
+		)
+
+	@task
+	def paint_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['paint_task'],
+			output_file=f'output/image_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.png'
 		)
 
 	@crew
