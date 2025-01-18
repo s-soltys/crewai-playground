@@ -21,7 +21,7 @@ write_poem_task:
     Write a very short sketch about {topic}, including all of the found information. Monty Python sketch style. Include all numbers, locations and people. Very grounded style.
     Max 100 words.
   expected_output: >
-    A short sketch
+    A short sketch, plain text
   agent: poet
 
 narrate_task:
