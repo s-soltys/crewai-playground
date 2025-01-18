@@ -1,5 +1,7 @@
 from crewai import Agent, Task, Crew, Process
 from langchain_openai import ChatOpenAI
+from langchain.tools import Tool
+from langchain_community.utilities.google_serper import GoogleSerperAPIWrapper
 import os
 from dotenv import load_dotenv
 
@@ -28,55 +30,70 @@ lmstudio_llm = ChatOpenAI(
     base_url="http://localhost:1234"
 )
 
+# Initialize search tool
+search = GoogleSerperAPIWrapper(serper_api_key=os.getenv("SERPER_API_KEY"))
+search_tool = Tool(
+    name="Search",
+    func=search.run,
+    description="Search the internet for information about poems and poetry"
+)
 
-poet_picker = Agent(
-    role='Artist Agent',
-    goal='Find the best artist for the job',
-    backstory='An experienced artist agent with deep knowledge of the art world',
-    llm=ollama_llm,
+
+# Create a poet agent
+manager_poet = Agent(
+    role='Manager Poet',
+    goal='Asks other poets to provide poems',
+    backstory='A poet manager',
+    llm=openai_llm,
     verbose=True
 )
 
 # Create a poet agent
-poet_haiku = Agent(
-    role='Haiku Poet',
-    goal='Write beautiful and meaningful haikus',
+ai_poet = Agent(
+    role='Local Poet',
+    goal='Write beautiful and meaningful poem',
     backstory='An experienced poet with deep knowledge of both haiku',
     llm=ollama_llm,
     verbose=True
 )
 
-poet_sonnet = Agent(
-    role='Sonnet Poet',
-    goal='Write beautiful and meaningful sonnets',
-    backstory='An experienced poet with deep knowledge of both sonnet',
+real_poet = Agent(
+    role='Poet Librarian',
+    goal='Find beautiful and meaningful sonnets',
+    backstory='An experienced poet librarian with deep knowledge of many poems who can find them on the internet',
     llm=ollama_llm,
+    tools=[search_tool],
     verbose=True
 )
 
 # Create the haiku task with the provided word
-pick_poet = Task(
-    description='Pick the best poet to write about {input}.',
-    expected_output='Pick your poet and delegate to them.',
-    agent=poet_sonnet
+write_poetry_task = Task(
+    description='Write poem about {input}.',
+    expected_output='Title of the poem, and the poem found about {input}.',
+    agent=ai_poet
 )
 
 # Create the haiku task with the provided word
-write_poetry_task = Task(
-    description='Write about {input}.',
-    expected_output='Write your poetry. No special characters or newline characters.',
-    agent=poet_sonnet
+find_poem_task = Task(
+    description='Find poem about {input}.',
+    expected_output='Title of the poem, and the poem found about {input}.',
+    agent=real_poet
+)
+
+pick_best_poem_task = Task(
+    description='Pick the best poem out of two poems by different angents',
+    expected_output='Two poems listed one by one, and the best one + reasons why it is the best',
+    agent=manager_poet
 )
 
 # Create and run the crew
 crew = Crew(
-    tasks=[write_poetry_task],  # Tasks to be delegated and executed under the manager's supervision
-    agents=[poet_haiku, poet_sonnet],
-    manager_llm=openai_llm,  # Mandatory if manager_agent is not set
+    agents=[ai_poet, real_poet],
+    tasks=[find_poem_task, write_poetry_task, pick_best_poem_task],  # Tasks to be delegated and executed under the manager's supervision
     process=Process.hierarchical,  # Specifies the hierarchical management approach
     respect_context_window=True,  # Enable respect of the context window for tasks
     memory=True,  # Enable memory usage for enhanced task execution
-    manager_agent=None,  # Optional: explicitly set a specific agent as manager instead of the manager_llm
+    manager_agent=manager_poet,  # Optional: explicitly set a specific agent as manager instead of the manager_llm
     planning=True,  # Enable planning feature for pre-execution strategy
     verbose=True
 )
