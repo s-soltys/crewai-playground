@@ -31,8 +31,7 @@ paint_task:
 
 narrate_task:
   description: >
-    Convert the provided text to speech using the most appropriate voice.
-    Choose from available voices: alloy, echo, fable, onyx, nova, or shimmer.
+    Convert the provided text to speech.
   expected_output: >
     An audio file containing the narrated text
   agent: tts_narrator

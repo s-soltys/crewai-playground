@@ -2,6 +2,7 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from datetime import datetime
 from crewai_tools import (SerperDevTool, DallETool)
+from .tools.tts_tool import TextToSpeechTool
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -44,6 +45,13 @@ class App():
 			config=self.agents_config['painter'],
 			tools=[DallETool()]
 		)
+
+	@agent
+	def tts_narrator(self) -> Agent:
+		return Agent(
+			config=self.agents_config['tts_narrator'],
+			tools=[TextToSpeechTool()]
+		)
 	
 	# To learn more about structured task outputs, 
 	# task dependencies, and task callbacks, check out the documentation:
@@ -75,6 +83,13 @@ class App():
 			output_file=f'output/image_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.png'
 		)
 
+	@task
+	def narrate_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['narrate_task'],
+			output_file=f'output/audio_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.mp3'
+		)
+
 	@crew
 	def crew(self) -> Crew:
 		"""Creates the App crew"""
@@ -83,7 +98,8 @@ class App():
 			tasks=[
 				self.research_news_task(),
 				self.summarise_task(),
-				self.write_poem_task()
+				self.write_poem_task(),
+				self.narrate_task()
 			],
 			process=Process.sequential,
 			verbose=True,
