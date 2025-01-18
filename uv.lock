@@ -135,14 +135,10 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "crewai", extra = ["tools"] },
-    { name = "openai" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "crewai", extras = ["tools"], specifier = ">=0.95.0,<1.0.0" },
-    { name = "openai", specifier = ">=1.0.0" },
-]
+requires-dist = [{ name = "crewai", extras = ["tools"], specifier = ">=0.95.0,<1.0.0" }]
 
 [[package]]
 name = "appdirs"

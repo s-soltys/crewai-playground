@@ -28,11 +28,3 @@ paint_task:
   expected_output: >
     An image representing the poem
   agent: painter
-
-read_text_task:
-  description: >
-    Convert the following text into speech: {text}
-    Choose an appropriate voice based on the content and context of the text.
-  expected_output: >
-    Path to the generated audio file
-  agent: audio_transcriber
