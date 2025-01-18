@@ -18,7 +18,7 @@ summarise_task:
 
 write_poem_task:
   description: >
-    Write a poem about {topic}, including all of the found information. "Data-Driven Poems" style, short and direct. Include all numbers, locations and people.
+    Write a poem about {topic}, including all of the found information. "Data-Driven Poems" style. Include all numbers, locations and people. Very grounded style.
   expected_output: >
     A short poem
   agent: poet
