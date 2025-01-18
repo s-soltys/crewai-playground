@@ -52,7 +52,13 @@ class App():
 			config=self.agents_config['tts_narrator'],
 			tools=[TextToSpeechTool()]
 		)
-	
+
+	@agent
+	def manager(self) -> Agent:
+		return Agent(
+			config=self.agents_config['manager']
+		)
+
 	# To learn more about structured task outputs, 
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
@@ -103,4 +109,16 @@ class App():
 			],
 			process=Process.sequential,
 			verbose=True,
+
+			#agents=self.agents,
+			#tasks=[
+			#	Task(
+			#		description="Write a data-driven poem about {topic} incorporating statistics and numbers, then create an audio version.",
+			#		expected_output="An audio file of a narrated poem that includes data and numbers"
+			#	)
+			#],
+			#manager_agent=self.manager,
+			#process=Process.hierarchical,
+			#verbose=True,
 		)
+	
