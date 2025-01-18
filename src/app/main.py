@@ -16,7 +16,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'Nosferatu'
+        'topic': 'Number of people in the world'
     }
     App().crew().kickoff(inputs=inputs)
 

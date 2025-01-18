@@ -14,3 +14,10 @@ summarise_task:
     A short summary of the information you received, containing all of the information but written in a very concise format.
     Regular text
   agent: summary_writer
+
+write_poem_task:
+  description: >
+    Write a poem about {topic}, including all of the found information.
+  expected_output: >
+    A short poem
+  agent: poet

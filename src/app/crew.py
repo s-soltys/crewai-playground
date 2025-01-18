@@ -23,14 +23,20 @@ class App():
 	def news_researcher(self) -> Agent:
 		return Agent(
 			config=self.agents_config['news_researcher'],
-			tools=[SerperDevTool()],
-			verbose=True
+			tools=[SerperDevTool()]
 		)
 
 	@agent
 	def summary_writer(self) -> Agent:
 		return Agent(
 			config=self.agents_config['summary_writer'],
+			verbose=True
+		)
+
+	@agent
+	def poet(self) -> Agent:
+		return Agent(
+			config=self.agents_config['poet'],
 			verbose=True
 		)
 
@@ -48,6 +54,13 @@ class App():
 		return Task(
 			config=self.tasks_config['summarise_task'],
 			output_file=f'output/report_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
+		)
+
+	@task
+	def write_poem_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['write_poem_task'],
+			output_file=f'output/poem_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
 		)
 
 	@crew
