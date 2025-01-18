@@ -1,20 +1,6 @@
-from crewai import Agent, Task, Crew
 from flask import Flask, jsonify, request
-from llms_and_agents import poet_haiku, poet_sonnet
+from llms_and_agents import crew
 
-# Create the haiku task with the provided word
-write_poetry_task = Task(
-    description='Write about {input}.',
-    expected_output='Write your poetry. No special characters or newline characters.',
-    agent=poet_sonnet
-)
-
-# Create and run the crew
-crew = Crew(
-    agents=[poet_sonnet],
-    tasks=[write_poetry_task],
-    verbose=False
-)
 
 # Initialize Flask app
 app = Flask(__name__)

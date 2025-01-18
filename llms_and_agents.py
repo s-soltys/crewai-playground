@@ -1,4 +1,4 @@
-from crewai import Agent
+from crewai import Agent, Task, Crew, Process
 from langchain_openai import ChatOpenAI
 import os
 from dotenv import load_dotenv
@@ -29,13 +29,21 @@ lmstudio_llm = ChatOpenAI(
 )
 
 
+poet_picker = Agent(
+    role='Artist Agent',
+    goal='Find the best artist for the job',
+    backstory='An experienced artist agent with deep knowledge of the art world',
+    llm=openai_llm,
+    verbose=True
+)
+
 # Create a poet agent
 poet_haiku = Agent(
     role='Haiku Poet',
     goal='Write beautiful and meaningful haikus',
     backstory='An experienced poet with deep knowledge of both haiku',
     llm=openai_llm,
-    verbose=False
+    verbose=True
 )
 
 poet_sonnet = Agent(
@@ -43,5 +51,27 @@ poet_sonnet = Agent(
     goal='Write beautiful and meaningful sonnets',
     backstory='An experienced poet with deep knowledge of both sonnet',
     llm=openai_llm,
-    verbose=False
+    verbose=True
+)
+
+# Create the haiku task with the provided word
+pick_poet = Task(
+    description='Pick the best poet to write about {input}.',
+    expected_output='Pick your poet and delegate to them.',
+    agent=poet_sonnet
+)
+
+# Create the haiku task with the provided word
+write_poetry_task = Task(
+    description='Write about {input}.',
+    expected_output='Write your poetry. No special characters or newline characters.',
+    agent=poet_sonnet
+)
+
+# Create and run the crew
+crew = Crew(
+    agents=[poet_sonnet],
+    tasks=[write_poetry_task],
+    process=Process.sequential,
+    verbose=True
 )
