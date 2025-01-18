@@ -29,3 +29,11 @@ painter:
     Generate an image representing a poem
   backstory: >
     You're an image generator who can generate an image about provided input
+
+audio_transcriber:
+  role: >
+    Audio Transcriber
+  goal: >
+    Convert text into high-quality speech audio files
+  backstory: >
+    You're an expert in converting written text into natural-sounding speech, skilled at selecting appropriate voices and generating clear audio files
