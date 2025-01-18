@@ -97,6 +97,13 @@ class App():
 			output_file=f'output/audio_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.mp3'
 		)
 
+	@task
+	def managed_poem_task(self) -> Task:
+		return Task(
+			description="Write a data-driven poem about {topic} incorporating statistics and numbers based on what you find on the internet.",
+			expected_output="An audio file, where the poem is narrated"
+		)
+
 	@crew
 	def crew(self) -> Crew:
 		"""Creates the App crew"""
@@ -110,12 +117,7 @@ class App():
 					self.painter(),
 					self.tts_narrator()
 				],
-				tasks=[
-					Task(
-						description="Write a data-driven poem about {topic} incorporating statistics and numbers.",
-						expected_output="An audio file, where the poem is narrated"
-					)
-				],
+				tasks=[self.managed_poem_task()],
 				manager_agent=self.manager(),
 				process=Process.hierarchical,
 				verbose=True
