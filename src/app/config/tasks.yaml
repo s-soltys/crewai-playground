@@ -4,7 +4,7 @@ research_news_task:
     Make sure you find any interesting and relevant information given
     the current year is 2024.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
+    A list with 5 bullet points of the most relevant information about {topic}
   agent: news_researcher
 
 summarise_task:
@@ -17,14 +17,14 @@ summarise_task:
 
 write_poem_task:
   description: >
-    Write a poem about {topic}, including all of the found information.
+    Write a poem about {topic}, including all of the found information. Hemingway style, short and direct.
   expected_output: >
     A short poem
   agent: poet
 
 paint_task:
   description: >
-    Paint a picture representing the prompt
+    Paint a picture representing the topic
   expected_output: >
     An image representing the poem
   agent: painter
