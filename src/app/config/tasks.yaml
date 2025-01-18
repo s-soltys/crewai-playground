@@ -18,7 +18,8 @@ summarise_task:
 
 write_poem_task:
   description: >
-    Write a sketch about {topic}, including all of the found information. Monty Python sketch style. Include all numbers, locations and people. Very grounded style.
+    Write a very short sketch about {topic}, including all of the found information. Monty Python sketch style. Include all numbers, locations and people. Very grounded style.
+    Max 100 words.
   expected_output: >
     A short sketch
   agent: poet
