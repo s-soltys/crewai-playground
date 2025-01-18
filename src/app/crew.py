@@ -24,26 +24,30 @@ class App():
 	def news_researcher(self) -> Agent:
 		return Agent(
 			config=self.agents_config['news_researcher'],
-			tools=[SerperDevTool()]
+			tools=[SerperDevTool()],
+			use_system_prompt=True
 		)
 
 	@agent
 	def summary_writer(self) -> Agent:
 		return Agent(
 			config=self.agents_config['summary_writer'],
+			use_system_prompt=True
 		)
 
 	@agent
 	def poet(self) -> Agent:
 		return Agent(
 			config=self.agents_config['poet'],
+			use_system_prompt=True
 		)
 
 	@agent
 	def tts_narrator(self) -> Agent:
 		return Agent(
 			config=self.agents_config['tts_narrator'],
-			tools=[TextToSpeechTool()]
+			tools=[TextToSpeechTool()],
+			use_system_prompt=True
 		)
 
 	@agent
@@ -84,8 +88,9 @@ class App():
 	@task
 	def managed_poem_task(self) -> Task:
 		return Task(
-			description="Write a data-driven poem about {topic} incorporating concrete numbers, places and people based on what you find on the internet.",
-			expected_output="An audio file, where the poem is narrated"
+			description=str("Create a comprehensive creative piece about {topic}. This involves research, analysis, and creative transformation of the information."),
+			expected_output=str("A creative piece with supporting research and audio narration"),
+			agent=self.manager()
 		)
 
 	@crew
