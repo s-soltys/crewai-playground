@@ -40,13 +40,6 @@ class App():
 		)
 
 	@agent
-	def painter(self) -> Agent:
-		return Agent(
-			config=self.agents_config['painter'],
-			tools=[DallETool()]
-		)
-
-	@agent
 	def tts_narrator(self) -> Agent:
 		return Agent(
 			config=self.agents_config['tts_narrator'],
@@ -72,22 +65,13 @@ class App():
 	@task
 	def summarise_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['summarise_task'],
-			output_file=f'output/report_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
+			config=self.tasks_config['summarise_task']
 		)
 
 	@task
 	def write_poem_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['write_poem_task'],
-			output_file=f'output/poem_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
-		)
-
-	@task
-	def paint_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['paint_task'],
-			output_file=f'output/image_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.png'
 		)
 
 	@task
@@ -114,7 +98,6 @@ class App():
 					self.news_researcher(),
 					self.summary_writer(),
 					self.poet(),
-					self.painter(),
 					self.tts_narrator()
 				],
 				tasks=[self.managed_poem_task()],
@@ -128,7 +111,6 @@ class App():
 					self.news_researcher(),
 					self.summary_writer(),
 					self.poet(),
-					self.painter(),
 					self.tts_narrator()
 				],
 				tasks=[
