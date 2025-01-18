@@ -16,11 +16,11 @@ summary_writer:
 
 poet:
   role: >
-    {topic} Poet
+    {topic} Sketch writer
   goal: >
-    Write poetry about {topic}
+    Write sketch about {topic}, inspired by Monty Python sketches
   backstory: >
-    You're a poet who writes poetry about {topic}
+    You're a sketch who writes copy about {topic}
 
 tts_narrator:
   role: >

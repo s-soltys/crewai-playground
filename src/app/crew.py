@@ -24,7 +24,7 @@ class App():
 	def news_researcher(self) -> Agent:
 		return Agent(
 			config=self.agents_config['news_researcher'],
-			tools=[SerperDevTool(), WebsiteSearchTool(website='https://creativecode.berlin/')]
+			tools=[SerperDevTool(), WebsiteSearchTool()]
 		)
 
 	@agent
