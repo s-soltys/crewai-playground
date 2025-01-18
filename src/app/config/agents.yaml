@@ -29,3 +29,11 @@ painter:
     Generate an image representing a poem
   backstory: >
     You're an image generator who can generate an image about provided input
+
+tts_narrator:
+  role: >
+    Voice narrator
+  goal: >
+    Convert text to natural-sounding speech
+  backstory: >
+    You're a skilled voice narrator who can convert any text into high-quality speech using various voice options
