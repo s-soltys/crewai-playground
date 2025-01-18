@@ -20,17 +20,17 @@ class App():
 	# If you would like to add tools to your agents, you can learn more about it here:
 	# https://docs.crewai.com/concepts/agents#agent-tools
 	@agent
-	def researcher(self) -> Agent:
+	def news_researcher(self) -> Agent:
 		return Agent(
-			config=self.agents_config['researcher'],
+			config=self.agents_config['news_researcher'],
 			tools=[SerperDevTool()],
 			verbose=True
 		)
 
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def summary_writer(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
+			config=self.agents_config['summary_writer'],
 			verbose=True
 		)
 
@@ -38,15 +38,15 @@ class App():
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
-	def research_task(self) -> Task:
+	def research_news_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['research_task'],
+			config=self.tasks_config['research_news_task'],
 		)
 
 	@task
-	def reporting_task(self) -> Task:
+	def summarise_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
+			config=self.tasks_config['summarise_task'],
 			output_file=f'output/report_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
 		)
 
