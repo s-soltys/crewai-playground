@@ -56,7 +56,8 @@ class App():
 	@agent
 	def manager(self) -> Agent:
 		return Agent(
-			config=self.agents_config['manager']
+			config=self.agents_config['manager'],
+			allow_delegation=True
 		)
 
 	# To learn more about structured task outputs, 

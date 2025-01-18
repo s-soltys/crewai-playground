@@ -16,7 +16,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'RIDE Capital'
+        'topic': 'Creative Code Stammtisch'
     }
     App().crew().kickoff(inputs=inputs)
 
