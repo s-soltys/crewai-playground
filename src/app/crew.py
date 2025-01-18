@@ -107,7 +107,7 @@ class App():
 	@crew
 	def crew(self) -> Crew:
 		"""Creates the App crew"""
-		use_managed = True
+		use_managed = False
 		if use_managed:
 			return Crew(
 				agents=[
