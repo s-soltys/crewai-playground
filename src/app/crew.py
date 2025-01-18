@@ -99,17 +99,23 @@ class App():
 	@crew
 	def crew(self) -> Crew:
 		"""Creates the App crew"""
-		use_managed = False
+		use_managed = True
 		if use_managed:
 			return Crew(
-				agents=self.agents,
+				agents=[
+					self.news_researcher(),
+					self.summary_writer(),
+					self.poet(),
+					self.painter(),
+					self.tts_narrator()
+				],
 				tasks=[
 					Task(
 						description="Write a data-driven poem about {topic} incorporating statistics and numbers.",
-						expected_output="A text file containing the poem"
+						expected_output="An audio file, where the poem is narrated"
 					)
 				],
-				manager_agent=self.manager,
+				manager_agent=self.manager(),
 				process=Process.hierarchical,
 				verbose=True
 			)
