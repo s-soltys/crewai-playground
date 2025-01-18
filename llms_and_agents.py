@@ -33,7 +33,7 @@ poet_picker = Agent(
     role='Artist Agent',
     goal='Find the best artist for the job',
     backstory='An experienced artist agent with deep knowledge of the art world',
-    llm=openai_llm,
+    llm=ollama_llm,
     verbose=True
 )
 
@@ -42,7 +42,7 @@ poet_haiku = Agent(
     role='Haiku Poet',
     goal='Write beautiful and meaningful haikus',
     backstory='An experienced poet with deep knowledge of both haiku',
-    llm=openai_llm,
+    llm=ollama_llm,
     verbose=True
 )
 
@@ -50,7 +50,7 @@ poet_sonnet = Agent(
     role='Sonnet Poet',
     goal='Write beautiful and meaningful sonnets',
     backstory='An experienced poet with deep knowledge of both sonnet',
-    llm=openai_llm,
+    llm=ollama_llm,
     verbose=True
 )
 
