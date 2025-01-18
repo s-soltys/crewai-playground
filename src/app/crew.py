@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from datetime import datetime
-from crewai_tools import (SerperDevTool, DallETool)
+from crewai_tools import (SerperDevTool, DallETool, WebsiteSearchTool)
 from .tools.tts_tool import TextToSpeechTool
 
 # If you want to run a snippet of code before or after the crew starts, 
@@ -24,7 +24,7 @@ class App():
 	def news_researcher(self) -> Agent:
 		return Agent(
 			config=self.agents_config['news_researcher'],
-			tools=[SerperDevTool()]
+			tools=[SerperDevTool(), WebsiteSearchTool(website='https://creativecode.berlin/')]
 		)
 
 	@agent

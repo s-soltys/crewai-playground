@@ -4,7 +4,7 @@ research_news_task:
     Make sure you find any interesting and relevant information given
     the current year is 2024.
   expected_output: >
-    A list with 5 bullet points of the most relevant information about {topic}
+    A list with 10 bullet points of the most relevant information about {topic}, include numbers, places and people names and nicknames.
   agent: news_researcher
 
 summarise_task:
@@ -12,12 +12,13 @@ summarise_task:
     Summarise the information you received into a more concise format.
   expected_output: >
     A short summary of the information you received, containing all of the information but written in a very concise format.
+    Keep numbers, places and people in the summary.
     Regular text
   agent: summary_writer
 
 write_poem_task:
   description: >
-    Write a poem about {topic}, including all of the found information. Hemingway style, short and direct.
+    Write a poem about {topic}, including all of the found information.  Kenneth Goldsmith style, short and direct. Include all numbers, locations and people.
   expected_output: >
     A short poem
   agent: poet
