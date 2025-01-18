@@ -18,9 +18,9 @@ summarise_task:
 
 write_poem_task:
   description: >
-    Write a poem about {topic}, including all of the found information. Monty Python sketch style. Include all numbers, locations and people. Very grounded style.
+    Write a sketch about {topic}, including all of the found information. Monty Python sketch style. Include all numbers, locations and people. Very grounded style.
   expected_output: >
-    A short poem
+    A short sketch
   agent: poet
 
 narrate_task:
