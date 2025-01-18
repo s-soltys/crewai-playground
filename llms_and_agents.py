@@ -70,8 +70,13 @@ write_poetry_task = Task(
 
 # Create and run the crew
 crew = Crew(
-    agents=[poet_sonnet],
-    tasks=[write_poetry_task],
-    process=Process.sequential,
+    tasks=[write_poetry_task],  # Tasks to be delegated and executed under the manager's supervision
+    agents=[poet_haiku, poet_sonnet],
+    manager_llm=openai_llm,  # Mandatory if manager_agent is not set
+    process=Process.hierarchical,  # Specifies the hierarchical management approach
+    respect_context_window=True,  # Enable respect of the context window for tasks
+    memory=True,  # Enable memory usage for enhanced task execution
+    manager_agent=None,  # Optional: explicitly set a specific agent as manager instead of the manager_llm
+    planning=True,  # Enable planning feature for pre-execution strategy
     verbose=True
 )
