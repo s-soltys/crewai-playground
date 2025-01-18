@@ -84,7 +84,7 @@ class App():
 	@task
 	def managed_poem_task(self) -> Task:
 		return Task(
-			description="Write a data-driven poem about {topic} incorporating statistics and numbers based on what you find on the internet.",
+			description="Write a data-driven poem about {topic} incorporating concrete numbers, places and people based on what you find on the internet.",
 			expected_output="An audio file, where the poem is narrated"
 		)
 
