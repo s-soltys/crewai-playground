@@ -1,5 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from datetime import datetime
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -44,7 +45,7 @@ class App():
 	def reporting_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
+			output_file=f'output/report_{datetime.now().strftime("%Y-%m-%d_%I-%M-%p")}.md'
 		)
 
 	@crew
